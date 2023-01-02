@@ -229,33 +229,17 @@ void disp() {
   display.print("BPM:  ");
   display.print(BPM, 0);
 
-  // lcd.setCursor(0, 0);
-  // lcd.write(3);
-  // lcd.print("BPM: ");
-  // lcd.print(BPM, 0);
   if (BPM < 100) {
-    // lcd.setCursor(8, 0);
-    // lcd.print(" ");
     display.setCursor(94, 0);
     display.print(" ");
-    //display.display();
   }
   display.setCursor(0, 16);
   display.setTextColor(WHITE, BLACK);
   display.setTextSize(2);
-  // lcd.setCursor(12, 0);
-  // lcd.write(0);
-  // lcd.write(1);
-  // lcd.write(2);
-  // lcd.write(1);
-  // lcd.setCursor(0, 1);
   display.print("Duty: ");
   display.print(duration_percentage, 0);
-  // lcd.print("Duty: ");
-  // lcd.print(duration_percentage, 0);
+
   if (duration_percentage < 10) {
-    // lcd.setCursor(7, 1);
-    // lcd.print(" ");
     display.setCursor(82, 16);
     display.print(" ");
   }
