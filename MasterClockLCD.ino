@@ -49,9 +49,11 @@ Button buttonStart = Button(4, BUTTON_PULLUP_INTERNAL, true, 50);
 void ClockOut96PPQN(uint32_t* tick) {
   Serial.write(MIDI_CLOCK);
 }
+
 void onClockStart() {
   Serial.write(MIDI_START);
 }
+
 void onClockStop() {
   Serial.write(MIDI_STOP);
 }
@@ -66,7 +68,6 @@ bool started = false;
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 #define OLED_RESET -1  // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-/*********************************************************************/
 
 void setup() {
   Serial.begin(31250);
@@ -153,7 +154,7 @@ void cycle_off() {
 void cycle_on() {
 
   float duration_percentage = map(analogRead(A1), 0, 1023, 1, 90);
-  int cycletime = (30000 / BPM);
+  int cycletime = (60000 / BPM);
   long cycle_start = cycletime;
   long cycle_stop = (cycletime * (duration_percentage / 100));
 
