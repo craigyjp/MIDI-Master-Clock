@@ -34,6 +34,10 @@
 SimpleTimer cvtime;
 int count = 0;
 int run;
+int rawValue;
+int oldValue;
+byte potPercentage;
+byte oldPercentage;
 
 // Encoder settings:
 // aPin, bPin, minValue, maxValue, initalValue, type (FULL_PULSE for quadrature pulse per detent)
@@ -243,7 +247,18 @@ void control() {
 
 void disp() {
 
-  float duration_percentage = map(analogRead(A1), 0, 1023, 1, 90);
+  float duration_percentage;
+  rawValue = analogRead(A1);
+  rawValue = analogRead(A1); // double read
+
+  rawValue = constrain(rawValue, 8, 1015);
+    if (rawValue < (oldValue - 8) || rawValue > (oldValue + 8)) {
+    oldValue = rawValue;
+    // convert to percentage
+    duration_percentage = map(oldValue, 8, 1008, 1, 90);
+  }
+  
+  //float duration_percentage = map(analogRead(A1), 0, 1023, 1, 90);
   display.setCursor(0, 0);
   display.setTextColor(WHITE, BLACK);
   display.setTextSize(2);
