@@ -2,8 +2,11 @@
   Synthesizer master clock
   with 1/8, 1/4, 1/2 and 1/1 time beats and Midi sync
 
-  Code by Potatopasty https://tg-music.neocities.org
+  Original code by Potatopasty https://tg-music.neocities.org
   potatopasty@pm.me
+
+  Code modified by Craig Barnes to display on a 128x32 i2c OLED
+  Includes a reset switch to reset the counter and send a MIDI song pos
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -41,7 +44,7 @@ byte oldPercentage;
 
 // Encoder settings:
 // aPin, bPin, minValue, maxValue, initalValue, type (FULL_PULSE for quadrature pulse per detent)
-NewEncoder encoder(2, 3, 40, 280, 100, FULL_PULSE);
+NewEncoder encoder(2, 3, 40, 280, 120, FULL_PULSE);
 int16_t prevEncoderValue;
 
 Button buttonStart = Button(4, BUTTON_PULLUP_INTERNAL, true, 50);
@@ -257,7 +260,7 @@ void disp() {
     // convert to percentage
     duration_percentage = map(oldValue, 8, 1008, 1, 90);
   }
-  
+
   //float duration_percentage = map(analogRead(A1), 0, 1023, 1, 90);
   display.setCursor(0, 0);
   display.setTextColor(WHITE, BLACK);
