@@ -41,6 +41,7 @@ NewEncoder encoder(2, 3, 40, 280, 100, FULL_PULSE);
 int16_t prevEncoderValue;
 
 Button buttonStart = Button(4, BUTTON_PULLUP_INTERNAL, true, 50);
+Button buttonReset = Button(9, BUTTON_PULLUP_INTERNAL, true, 50);
 
 #define MIDI_CLOCK 0xF8
 #define MIDI_START 0xFA
@@ -88,7 +89,8 @@ void setup() {
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
-  digitalWrite(10, HIGH);
+  pinMode(10, OUTPUT);
+  digitalWrite(10, LOW);
 
   display.clearDisplay();
 
@@ -100,7 +102,7 @@ void setup() {
   display.setCursor(27, 10);
   display.print(F("MASTER CLOCK"));
   display.display();
-  delay(5000);
+  delay(2000);
   display.clearDisplay();
   display.display();
 }
@@ -121,6 +123,24 @@ void loop() {
       digitalWrite(8, LOW);
     }
   }
+
+  if (buttonReset.uniquePress()) {
+    if (run == false) {
+      uClock.resetCounters();
+      digitalWrite(5, LOW);
+      digitalWrite(6, LOW);
+      digitalWrite(7, LOW);
+      digitalWrite(8, LOW);
+      digitalWrite(10, HIGH);
+      delay(50);
+      digitalWrite(10, LOW);
+      Serial.write(0xF2);
+      Serial.write(0x00);
+      Serial.write(0x00);
+      count = 0;
+    }
+  }
+
   if (run > false) {
     cvtime.run();
     if (!started) {
