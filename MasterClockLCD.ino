@@ -48,7 +48,7 @@ NewEncoder encoder(2, 3, 40, 280, 120, FULL_PULSE);
 int16_t prevEncoderValue;
 
 Button buttonStart = Button(4, BUTTON_PULLUP_INTERNAL, true, 50);
-Button buttonReset = Button(9, BUTTON_PULLUP_INTERNAL, true, 50);
+Button buttonReset = Button(10, BUTTON_PULLUP_INTERNAL, true, 50);
 
 #define MIDI_CLOCK 0xF8
 #define MIDI_START 0xFA
@@ -96,8 +96,8 @@ void setup() {
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
-  pinMode(10, OUTPUT);
-  digitalWrite(10, LOW);
+  pinMode(9, OUTPUT);
+  digitalWrite(9, LOW);
 
   display.clearDisplay();
 
@@ -138,9 +138,9 @@ void loop() {
       digitalWrite(6, LOW);
       digitalWrite(7, LOW);
       digitalWrite(8, LOW);
-      digitalWrite(10, HIGH);
+      digitalWrite(9, HIGH);
       delay(50);
-      digitalWrite(10, LOW);
+      digitalWrite(9, LOW);
       Serial.write(0xF2);
       Serial.write(0x00);
       Serial.write(0x00);
