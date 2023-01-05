@@ -13,5 +13,6 @@ Features including:<br>
 - Midi clock out with start and stop
 - Reset button with pulse out and MIDI song position.
 - Easy to read I2C 128x32 OLED Display
+- Pulses available at +5v and +10v
 
 Tested with MIDI-OX, Pocket Operator Arcade and Arduino Uno/Nano.
