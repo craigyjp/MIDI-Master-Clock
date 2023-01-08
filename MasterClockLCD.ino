@@ -181,7 +181,7 @@ void cycle_off() {
 void cycle_on() {
 
   float duration_percentage = map(analogRead(A1), 0, 1023, 1, 90);
-  int cycletime = (60000 / BPM);
+  int cycletime = (30000 / BPM);
   long cycle_start = cycletime;
   long cycle_stop = (cycletime * (duration_percentage / 100));
 
